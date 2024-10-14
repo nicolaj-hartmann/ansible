@@ -1,4 +1,16 @@
 ---
-- name: Print the hostname and tag
-  debug:
-    msg: "k3s!"
+- name: Install K3s
+  shell: curl -sfL https://get.k3s.io | sh -
+
+- name: Ensure K3s service is running
+  service:
+    name: k3s
+    state: started
+    enabled: true
+
+- name: Print K3s version
+  shell: k3s --version
+  register: k3s_version
+
+- debug:
+    msg: "K3s installed with version: {{ k3s_version.stdout }}"
