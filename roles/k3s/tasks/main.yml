@@ -1,0 +1,4 @@
+---
+- name: Print the hostname and tag
+  debug:
+    msg: "Hostname is"
